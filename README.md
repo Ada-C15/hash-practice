@@ -30,7 +30,7 @@ Note:
 - All inputs will be in lowercase.
 - The order of your output does not matter
 
-## Valid Sudoku
+## Optional Valid Sudoku
 
 Determine if a 9x9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
 
