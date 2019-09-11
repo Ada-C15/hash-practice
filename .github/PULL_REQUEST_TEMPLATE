@@ -1,0 +1,14 @@
+# Hash Table Practice
+
+Congratulations! You're submitting your assignment!
+
+## Comprehension Questions
+Question | Answer
+:------------- | :-------------
+Why is a good Hash Function Important? | 
+How can you judge if a hash function is good or not? | 
+Is there a perfect hash function?  If so what is it? | 
+Describe a strategy to handle collisions in a hash table | 
+Describe a situation where a hash table wouldn't be as useful as a binary search tree | 
+What is one thing that is more clear to you on hash tables now | 
+
