@@ -3,7 +3,8 @@
 In this exercise you should look for:
 
 | Criteria | Comment |
-|--- |--- |
+|:--- |:--- |
+| Comprehension Questions | |
 | Good git hygiene  | |
 | Makes effective use of Hashes | |
 | grouped_anagrams |  |
