@@ -1,3 +1,17 @@
+import heapq
+
+class MaxHeapObj(object):
+    def __init__(self, num_and_count):
+        self.num = num_and_count['num']
+        self.count = num_and_count['count']
+
+    def __lt__(self, other):
+        return self.count > other.count
+    def __eq__(self, other):
+        return self.count == other.count
+
+    def __str__(self):
+        return f"{self.num}: {self.count}"
 
 def grouped_anagrams(strings):
     """ This method will return an array of arrays.
@@ -24,13 +38,31 @@ def grouped_anagrams(strings):
     return answer
 
 
-def top_k_frequent_elements(list, k):
+def top_k_frequent_elements(nums, k):
     """ This method will return the k most common elements
         In the case of a tie it will select the first occuring element.
         Time Complexity: ?
         Space Complexity: ?
     """
-    pass
+    number_count = {}
+    for num in nums:
+        if number_count.get(num):
+            number_count[num] += 1
+        else:
+            number_count[num] = 1
+
+    maxHeap = []
+    for num, count in number_count.items():
+        heapq.heappush(maxHeap, (count, num))
+        if len(maxHeap) > k:
+            heapq.heappop(maxHeap)
+    
+    topK = []
+    while maxHeap:
+        topK.append(heapq.heappop(maxHeap)[1])
+
+    return topK
+
 
 
 def valid_sudoku(table):
