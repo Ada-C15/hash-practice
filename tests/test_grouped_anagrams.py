@@ -23,6 +23,7 @@ def test_will_return_correct_result_for_readme_example():
     # Assert
     assert len(answer) == 3
     for words in answer:
+        words.sort()
         assert words in expected_answer
 
 def test_works_for_strings_with_no_matching_anagrams():
