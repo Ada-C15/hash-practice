@@ -24,6 +24,18 @@ def test_it_works_with_example_2():
     # Assert
     assert numbers == [1]
 
+def test_will_return_empty_list_given_an_empty_list():
+    # Arrange
+    numbers = []
+    k = 1
+
+    # Act
+    answer = top_k_frequent_elements(numbers, k)
+
+    # Assert
+    assert answer == []
+
+
 def test_will_work_for_list_with_k_elements_all_unique():
     # Arrange
     numbers = [1, 2, 3]
