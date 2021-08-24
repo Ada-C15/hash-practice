@@ -56,3 +56,24 @@ def test_will_work_for_strings_that_are_all_anagrams():
     assert answer == expected_answer
 
 
+def test_will_work_for_strings_which_are_all_not_anagrams():
+    # Arrange
+    words = ["eat", "ear", "tar", "pop", "pan", "pap"]
+
+    # Act
+    answer = grouped_anagrams(words)
+    expected_answer = [
+        ["eat"],
+        ["ear"],
+        ["tar"],
+        ["pop"],
+        ["pan"],
+        ["pap"]
+      ];
+
+    # Assert
+    assert len(answer) == 6
+
+    for anagrams in expected_answer:
+        assert len(anagrams) == 1
+        assert anagrams in expected_answer
