@@ -5,7 +5,18 @@ def grouped_anagrams(strings):
         Time Complexity: ?
         Space Complexity: ?
     """
-    pass
+    hash_table = {}
+    for word in strings:
+        # print(word)
+        sort_word = ''.join(sorted(word))
+        print(sort_word)
+        if sort_word in hash_table:
+            hash_table[sort_word].append(word)
+        else:
+            hash_table[sort_word] = [word]
+    print(hash_table)
+    print(list(hash_table.values()))
+    return list(hash_table.values())
 
 def top_k_frequent_elements(nums, k):
     """ This method will return the k most common elements
