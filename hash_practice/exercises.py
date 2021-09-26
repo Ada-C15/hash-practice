@@ -31,15 +31,12 @@ def top_k_frequent_elements(nums, k):
         else:
             hash_table[num] = 1
 
-    print(hash_table)
     sort_values = sorted(hash_table, key=lambda x: hash_table[x], reverse=True)
-    print(sort_values)
 
     elements = []
     for i in range(0, k):
         elements.append(sort_values[i])
 
-    print(elements)
     return elements
 
 
@@ -49,8 +46,27 @@ def valid_sudoku(table):
         Each element can either be a ".", or a digit 1-9
         The same digit cannot appear twice or more in the same 
         row, column or 3x3 subgrid
-        Time Complexity: ?
-        Space Complexity: ?
+        Time Complexity: O(n^2)
+        Space Complexity: O(n)
     """
-    pass
+
+    for list in table:
+        hash_table = {}
+        for char in list:
+            if char == '.':
+                continue
+            if char in hash_table:
+                hash_table[char] += 1
+            else:
+                hash_table[char] = 1
+        print(hash_table)
+        for value in hash_table.values():
+            # print(value)
+            if value > 1:
+                return False
+    print(hash_table)
+
+    return True
+    
+
 
