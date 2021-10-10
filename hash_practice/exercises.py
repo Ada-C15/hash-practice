@@ -2,8 +2,8 @@
 def grouped_anagrams(strings):
     """ This method will return an array of arrays.
         Each subarray will have strings which are anagrams of each other
-        Time Complexity: ?
-        Space Complexity: ?
+        Time Complexity: O(n)
+        Space Complexity: O(n)
     """
     anagram_dict = {}
 
@@ -27,16 +27,15 @@ def grouped_anagrams(strings):
 def top_k_frequent_elements(nums, k):
     """ This method will return the k most common elements
         In the case of a tie it will select the first occuring element.
-        Time Complexity: ?
-        Space Complexity: ?
+        Time Complexity: O(n)
+        Space Complexity: O(n)
     """
     num_dict = {}
     result = []
-
     freq_dict = {}
     num_freqs = []
 
-    #polulate the dictionary
+    #populate the first dictionary
     for i in nums:
         #map key to value
         if i not in num_dict:
@@ -44,20 +43,22 @@ def top_k_frequent_elements(nums, k):
         else:
             num_dict[i] += 1
 
-    
-    for key,value in num_dict.items():
+    #populate another dictionary with frequency as key and values with 
+    #nums with that frequecy
+    for key, value in num_dict.items():
         if (value not in freq_dict):
             freq_dict[value] = [key]
         else:
             freq_dict[value].append(key)
 
-        # num_freqs is list of unique frequencies
+        # num_freqs is a list of unique frequencies
         if (value not in num_freqs):
             num_freqs.append(value)
         
     num_freqs.sort(reverse=True)
 
     for freq in num_freqs:
+        #list of numbers for this frequency
         nums_for_freq = freq_dict[freq]
         for num in nums_for_freq:
             if(len(result) < k):
