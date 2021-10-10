@@ -5,7 +5,13 @@ def grouped_anagrams(strings):
         Time Complexity: ?
         Space Complexity: ?
     """
-    pass
+    # return_array = []
+    # for word in strings:
+    #     word_dict = {}
+    #     for letter in word:
+    #         if not letter:
+                
+        
 
 def top_k_frequent_elements(nums, k):
     """ This method will return the k most common elements
@@ -13,8 +19,21 @@ def top_k_frequent_elements(nums, k):
         Time Complexity: ?
         Space Complexity: ?
     """
-    pass
+    return_arr = []
+    nums_dict = {}
+    if len(nums) == 0:
+        return []
+    for num in nums:
+        if num not in nums_dict:
+            nums_dict[num] = 1
+        else: 
+            nums_dict[num] += 1
+    for i in range (0,k):
+        highest = max(nums_dict, key=nums_dict.get)
+        return_arr.append(highest)
+        nums_dict.pop(highest)
 
+    return return_arr
 
 def valid_sudoku(table):
     """ This method will return the true if the table is still
@@ -26,4 +45,7 @@ def valid_sudoku(table):
         Space Complexity: ?
     """
     pass
+
+nums= [1,3,3,4,4]
+top_k_frequent_elements(nums, 2)
 
