@@ -44,7 +44,7 @@ def top_k_frequent_elements(nums, k):
             num_dict[i] += 1
 
     #populate another dictionary with frequency as key and values with 
-    #nums with that frequecy
+    #nums with that frequency
     for key, value in num_dict.items():
         if (value not in freq_dict):
             freq_dict[value] = [key]
@@ -69,10 +69,6 @@ def top_k_frequent_elements(nums, k):
     return result
 
     
-
-
-
-
 def valid_sudoku(table):
     """ This method will return the true if the table is still
         a valid sudoku table.
