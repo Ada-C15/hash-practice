@@ -5,29 +5,41 @@ def grouped_anagrams(strings):
         Time Complexity: ?
         Space Complexity: ?
     """
-#     return_array = []
-#     main_dict = {}
-#     temp_dict = {}
-#     for word in strings:
-#         for letter in word:
-#             if letter not in temp_dict:
-#                 temp_dict[letter] = 1
-#             else:
-#                 temp_dict[letter] += 1
-#             if temp_dict not in main_dict:        
-#                 main_dict[temp_dict] = [word]
-#             else:
-#                 # main_dict[temp_dict] += [word]
-#                 main_dict[temp_dict].append(word)
-#     for key,value in main_dict.items():
-#         return_array.append(key)
+    final_anagram_lists = []
+    anagram_set = {}
+    for word1 in strings:           # for each with index loop goes through the value 
+        if word1 in anagram_set:
+            continue
+        temp_anagrams = [word1] 
+        anagram_set[word1] = 1
+        for word2 in strings:
+            if compare_anagrams(word1, word2):
+                if word2 not in anagram_set:
+                    temp_anagrams.append(word2)
+                    anagram_set[word2] = 1
+        final_anagram_lists.append(temp_anagrams)
+        temp_anagrams = []
+    return final_anagram_lists
 
-#     print(return_array)
-#     print(main_dict)
-#     print(temp_dict)
-
-# grouped_anagrams(["bat", "cat", "tab", "r"])                    
-
+def compare_anagrams(str1, str2):
+    str1_hash = {}
+    str2_hash = {}
+    for letter in str1:
+        if letter in str1_hash:
+            str1_hash[letter] += 1
+        else:
+            str1_hash[letter] = 1
+    
+    for letter in str2:
+        if letter in str2_hash:
+            str2_hash[letter] += 1
+        else:
+            str2_hash[letter] = 1
+            
+    if str1_hash == str2_hash:
+        return True
+    else:
+        return False
 
 def top_k_frequent_elements(nums, k):
     """ This method will return the k most common elements
