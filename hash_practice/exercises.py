@@ -2,8 +2,8 @@
 def grouped_anagrams(strings):
     """ This method will return an array of arrays.
         Each subarray will have strings which are anagrams of each other
-        Time Complexity: ?
-        Space Complexity: ?
+        Time Complexity: O(n3)  - is that really true?!?!  eeekk
+        Space Complexity: O(n2)
     """
     final_anagram_lists = []
     anagram_set = {}
@@ -44,8 +44,8 @@ def compare_anagrams(str1, str2):
 def top_k_frequent_elements(nums, k):
     """ This method will return the k most common elements
         In the case of a tie it will select the first occuring element.
-        Time Complexity: ?
-        Space Complexity: ?
+        Time Complexity: O(n)
+        Space Complexity: O(n)
     """
     return_arr = []
     nums_dict = {}
@@ -69,8 +69,8 @@ def valid_sudoku(table):
         Each element can either be a ".", or a digit 1-9
         The same digit cannot appear twice or more in the same 
         row, column or 3x3 subgrid
-        Time Complexity: ?
-        Space Complexity: ?
+        Time Complexity: O(n)  or is it O(1) since its of a fixed size?
+        Space Complexity: O(n) or is it O(1) since its of a fixed size?
     """
     for row in range(0,9):
         row_dict = {}
