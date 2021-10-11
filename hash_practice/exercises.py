@@ -5,13 +5,29 @@ def grouped_anagrams(strings):
         Time Complexity: ?
         Space Complexity: ?
     """
-    # return_array = []
-    # for word in strings:
-    #     word_dict = {}
-    #     for letter in word:
-    #         if not letter:
-                
-        
+#     return_array = []
+#     main_dict = {}
+#     temp_dict = {}
+#     for word in strings:
+#         for letter in word:
+#             if letter not in temp_dict:
+#                 temp_dict[letter] = 1
+#             else:
+#                 temp_dict[letter] += 1
+#             if temp_dict not in main_dict:        
+#                 main_dict[temp_dict] = [word]
+#             else:
+#                 # main_dict[temp_dict] += [word]
+#                 main_dict[temp_dict].append(word)
+#     for key,value in main_dict.items():
+#         return_array.append(key)
+
+#     print(return_array)
+#     print(main_dict)
+#     print(temp_dict)
+
+# grouped_anagrams(["bat", "cat", "tab", "r"])                    
+
 
 def top_k_frequent_elements(nums, k):
     """ This method will return the k most common elements
@@ -29,9 +45,9 @@ def top_k_frequent_elements(nums, k):
         else: 
             nums_dict[num] += 1
     for i in range (0,k):
-        highest = max(nums_dict, key=nums_dict.get)
-        return_arr.append(highest)
-        nums_dict.pop(highest)
+        highest_key = max(nums_dict, key=nums_dict.get)
+        return_arr.append(highest_key)
+        nums_dict.pop(highest_key)
 
     return return_arr
 
@@ -44,8 +60,44 @@ def valid_sudoku(table):
         Time Complexity: ?
         Space Complexity: ?
     """
-    pass
+    for row in range(0,9):
+        row_dict = {}
+        for col in range(0,9):
+            tile = table[row][col]
+            if tile == ".":
+                continue
+            elif tile not in row_dict:
+                row_dict[tile] = 1
+            else:
+                print(row_dict)
+                return False 
+    for col in range (0,9):
+        col_dict = {}
+        for row in range(0,9):
+            tile = table[row][col]
+            if tile == ".":
+                continue
+            elif tile not in col_dict:
+                col_dict[tile] = 1
+            else:
+                print(col_dict)
+                return False 
 
-nums= [1,3,3,4,4]
-top_k_frequent_elements(nums, 2)
+    return True
 
+
+
+table = [
+        ["5","3",".",".","7",".",".",".","."],
+        ["6",".",".","1","9","5",".",".","."],
+        [".","9","8",".",".",".",".","6","."],
+        ["8",".",".",".","6",".",".",".","3"],
+        ["4",".",".","8",".","3",".",".","1"],
+        ["7",".",".",".","2",".",".",".","6"],
+        [".","6",".",".",".",".","2","8","."],
+        [".",".",".","4","1","9",".",".","5"],
+        [".",".",".",".","8",".",".","7","9"]
+        ]
+
+
+print(valid_sudoku(table))
