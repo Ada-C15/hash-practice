@@ -75,8 +75,8 @@ def valid_sudoku(table):
         Each element can either be a ".", or a digit 1-9
         The same digit cannot appear twice or more in the same 
         row, column or 3x3 subgrid
-        Time Complexity: ?
-        Space Complexity: ?
+        Time Complexity: o(n^2)
+        Space Complexity: O(n^2 x n) = O(n^3) - 1 hashtable per row and col, each hashtable has N entries in worst case
     """
     
     row_counts = []
