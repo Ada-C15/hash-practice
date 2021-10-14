@@ -1,11 +1,58 @@
+#This is a solution that I worked out with a study group hosted by a TA and Al. It was working 
+#until I made some changes and now I cant seem to figure out what I did or how it was
+#really working in the first place. I will continue to work on it but I didnt feel it was worthy 
+#turning in fully. 
 
-def grouped_anagrams(strings):
-    """ This method will return an array of arrays.
-        Each subarray will have strings which are anagrams of each other
-        Time Complexity: ?
-        Space Complexity: ?
-    """
-    pass
+# def anagram_helper(word1, word2):
+
+#     char_map1 = {}
+#     char_map2 = {}
+
+#     for char in word1:
+#         if char not in char_map1:
+#             char_map1[char] = 1
+#         else:
+#             char_map1[char] += 1
+    
+#     for chr in word2:
+#         if char not in char_map2:
+#             char_map2[char] = 1
+#         else:
+#             char_map2[char] += 1
+
+#     if char_map1 == char_map2:
+#         return True
+#     else:
+#         return False
+
+# def grouped_anagrams(strings):
+#     """ This method will return an array of arrays.
+#         Each subarray will have strings which are anagrams of each other
+#         Time Complexity: ?
+#         Space Complexity: ?
+#     """
+#     temp = []
+#     grouped_anagrams = []
+#     hash_set = {}
+
+#     for i, word1 in enumerate(strings):
+#         if word1 in hash_set:
+#             continue
+        
+#         temp = [word1]
+#         hash_set[word1] = 1
+
+#         for j, word2 in enumerate(strings):
+#             if anagram_helper(word1, word2):
+#                 if word2 not in hash_set:
+#                     temp.append(word2)
+#                     hash_set[word2] = 1
+        
+#         grouped_anagrams.append(temp)
+#         temp = []
+
+#     return grouped_anagrams
+
 
 def top_k_frequent_elements(nums, k):
     """ This method will return the k most common elements
@@ -13,7 +60,24 @@ def top_k_frequent_elements(nums, k):
         Time Complexity: ?
         Space Complexity: ?
     """
-    pass
+
+    freq_map = {}
+    k_freq_elements = []
+
+    if nums:
+
+        for num in nums:
+            if num not in freq_map:
+                freq_map[num] = 1
+            else:
+                freq_map[num] += 1
+
+        for i in range(0,k):
+            key_with_max_val = max(freq_map, key=freq_map.get)
+            k_freq_elements.append(key_with_max_val)
+            del freq_map[key_with_max_val]
+    
+    return k_freq_elements
 
 
 def valid_sudoku(table):
