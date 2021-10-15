@@ -23,8 +23,8 @@ def grouped_anagrams(strings):
 def top_k_frequent_elements(nums, k):
     """ This method will return the k most common elements
         In the case of a tie it will select the first occuring element.
-        Time Complexity: ?
-        Space Complexity: ?
+        Time Complexity: O(n log n)
+        Space Complexity: O(n)
     """
     frequency_dict = {}
     if nums == []:
