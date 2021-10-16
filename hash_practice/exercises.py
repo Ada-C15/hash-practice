@@ -1,13 +1,54 @@
-
+# Time Complexity: ?
+# Space Complexity: O(n)
 def grouped_anagrams(strings):
-    """ This method will return an array of arrays.
-        Each subarray will have strings which are anagrams of each other
-        Time Complexity: ?
-        Space Complexity: ?
-    """
-    pass
+    # check to see if the list is empty
+    words = []
+    if not strings:
+        return words
+    # sort every item in list
+    sorted_list = []
+    for word in strings:
+        x = sorted(word)
+        y = ''.join(x)
+        sorted_list.append(y)
+
+    # declare empty hash
+    word_dict = {}
+    # iterate over list, if item is not in dict, add a new key (sorted item), and value in a list, unsorted
+    index = 0
+    for word in sorted_list:
+        if word not in word_dict:
+            word_dict[word] = [strings[index]]
+            index += 1
+        else:
+            word_dict[word] += [strings[index]]
+            index += 1
+
+    for value in word_dict.values():
+        words.append(value)
+
+    return words
+
 
 def top_k_frequent_elements(nums, k):
+    # build a dict with keys being item in nums, value being frequency
+    num_dict = {}
+    for num in nums:
+        if num not in num_dict:
+            num_dict[num] = 1
+        else:
+            num_dict[num] += 1
+
+    num_list = sorted(num_dict.items(), key=lambda item: item[1], reverse=True)
+
+    i = 0
+    return_list = []
+    while i < k:
+        return_list.append(num_list[i][0])
+        i += 1
+
+    return return_list
+
     """ This method will return the k most common elements
         In the case of a tie it will select the first occuring element.
         Time Complexity: ?
@@ -26,4 +67,3 @@ def valid_sudoku(table):
         Space Complexity: ?
     """
     pass
-
