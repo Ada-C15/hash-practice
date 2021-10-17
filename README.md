@@ -9,6 +9,26 @@ By the end of this exercise you should be able to:
 - Use a hash table to solve a coding problem
 - Identify how a hash table can produce a more attractive runtime over alternative solutions
 
+## Getting Started
+
+As usual with a python project, create a virtual environment:
+
+```
+python3 -m venv venv
+```
+
+Then activate the virtual environment
+
+```
+source venv/bin/activate
+```
+
+Then install the required packages.
+
+```
+pip install -r requirements.txt
+```
+
 ## Grouped Anagrams
 
 Given an array of strings, group anagrams together.
