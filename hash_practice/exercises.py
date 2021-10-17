@@ -54,7 +54,46 @@ def valid_sudoku(table):
         Each element can either be a ".", or a digit 1-9
         The same digit cannot appear twice or more in the same
         row, column or 3x3 subgrid
-        Time Complexity: ?
-        Space Complexity: ?
+        Time Complexity: O(1) (because it is always a 9x9 grid??)
+        Space Complexity: O(1)
     """
-    pass
+    # validates rows in sudoku table
+    for row in table:
+        # could this dict be a set, because we are just checking for duplicates?
+        row_dict = {}
+        for square in row:
+            if square != ".":
+                if square not in row_dict:
+                    row_dict[square] = 1
+                else:
+                    return False
+
+    # validates columns in sudoku table
+    for col in range(0, len(table)):
+        col_dict = {}
+        for square in table[col]:
+            if square != ".":
+                if square not in col_dict:
+                    col_dict[square] = 1
+                else:
+                    return False
+
+    # validates smaller 3x3 tables within larger sudoku table
+    # this is horrendously bad time complexity, but if the table is always 9x9, does it matter?
+    for row in range(3):
+        for col in range(3):
+            block_dict = {}
+            block = [
+                table[3*row][3*col:3*col+3],
+                table[3*row+1][3*col:3*col+3],
+                table[3*row+2][3*col:3*col+3]
+            ]
+            for segment in block:
+                for elem in segment:
+                    if elem != ".":
+                        if elem in block_dict:
+                            return False
+                        else:
+                            block_dict[elem] = 1
+
+    return True
