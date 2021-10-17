@@ -69,7 +69,7 @@ def test_will_work_for_strings_which_are_all_not_anagrams():
         ["pop"],
         ["pan"],
         ["pap"]
-      ];
+    ];
 
     # Assert
     assert len(answer) == 6
