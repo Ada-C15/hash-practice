@@ -18,7 +18,7 @@ def test_will_return_correct_result_for_readme_example():
         ["ate","eat","tea"],
         ["nat","tan"],
         ["bat"]
-      ]
+    ]
 
     # Assert
     assert len(answer) == 3

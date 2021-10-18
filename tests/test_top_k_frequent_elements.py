@@ -4,6 +4,7 @@ from hash_practice.exercises import top_k_frequent_elements
 def test_it_works_with_example_1():
     # Arrange
     numbers = [1, 1, 1, 2, 2, 3]
+
     k = 2
 
     # Act
