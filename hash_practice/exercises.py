@@ -5,7 +5,44 @@ def grouped_anagrams(strings):
         Time Complexity: ?
         Space Complexity: ?
     """
-    pass
+    groupings = []
+
+    j = 0
+    while j < len(strings):
+
+        letter_map = {}
+        sub_group = [strings[j]]
+
+        for letter in strings[j]:
+            if letter not in letter_map:
+                letter_map[letter] = 1
+            else:
+                letter_map[letter] += 1
+
+        k = j + 1
+        while k < len(strings):
+
+            comparison_letter_map = {}
+
+            for letter in strings[k]:
+                if letter not in comparison_letter_map:
+                    comparison_letter_map[letter] = 1
+                else:
+                    comparison_letter_map[letter] += 1
+
+            if comparison_letter_map == letter_map:
+                sub_group.append(strings[k])
+                strings.remove(strings[k])
+                k = k
+            else:
+                k += 1
+        
+        groupings.append(sub_group)
+
+        j += 1
+
+    return groupings
+
 
 def top_k_frequent_elements(nums, k):
     """ This method will return the k most common elements
@@ -13,7 +50,36 @@ def top_k_frequent_elements(nums, k):
         Time Complexity: ?
         Space Complexity: ?
     """
-    pass
+    most_frequent_elements = []
+
+    if not nums:
+        return most_frequent_elements
+
+    num_frequency_map = {}
+
+    for num in nums:
+        if num not in num_frequency_map:
+            num_frequency_map[num] = 1
+        else:
+            num_frequency_map[num] += 1
+
+    frequencies_list = []
+
+    for freq_value in num_frequency_map.values():
+        frequencies_list.append(freq_value)
+
+    frequencies_list.sort()
+
+    for i in range(k):
+
+        search_specific_freq = frequencies_list[-(i+1)] 
+
+        for num in num_frequency_map:
+            if num_frequency_map[num] == search_specific_freq:
+                most_frequent_elements.append(num)
+            
+            if len(most_frequent_elements) == k:
+                return most_frequent_elements
 
 
 def valid_sudoku(table):
