@@ -63,10 +63,65 @@ def grouped_anagrams(strings):
 def top_k_frequent_elements(nums, k):
     """ This method will return the k most common elements
         In the case of a tie it will select the first occuring element.
+
+        Pseudocode solution 2:
+        1.
+        2.
+        3.
+        4.
+
         Time Complexity: ?
         Space Complexity: ?
     """
-    pass
+    if len(nums) == k:
+        return nums
+    if len(nums) == 0:
+        return []
+
+
+def top_k_frequent_elements_alternative_solution(nums, k):
+    """ This method will return the k most common elements
+        In the case of a tie it will select the first occuring element.
+
+        pseudocode solution 1:
+        This solution would work for both sorted and not sorted input array.
+        0. Go over the input array and create unique element frequency hash table.
+        1. Go over the frequency hash table and create an array of tuples: [(x1,y1),(x2,y2),(x3,y3),...(xn,yn)]
+        where x1, x2, ..., xn - unique integer elements from the input array
+        and y1, y2, ..., yn their frequencies relatively.
+        2. Sort new array by key, where key is frequency (second element of each tuple).
+        3. Iterate over sorted array k times to form the output by grabbing first element of each tuple and appending it to the resulting array
+
+        Time Complexity: O(nlogn) (sorting)
+        Space Complexity: O(n+k) ?
+
+    """
+    if len(nums) == k:
+        return nums
+    if len(nums) == 0:
+        return []
+
+    frequency_map = {}
+    for num in nums:
+        if frequency_map.get(num):
+            frequency_map[num] += 1
+        else:
+            frequency_map[num] = 1
+
+    num_freq_list = []
+    for num, frequency in frequency_map.items():
+        num_freq_list.append((num, frequency))
+
+    sorted_num_freq_list = sorted(
+        num_freq_list,
+        key=lambda tup: tup[1],
+        reverse=True)
+
+    result = []
+    for i in range(k):
+        result.append(sorted_num_freq_list[i][0])
+
+    return result
 
 
 def valid_sudoku(table):
@@ -81,4 +136,5 @@ def valid_sudoku(table):
     pass
 
 
-grouped_anagrams(["eat", "tea", "tan", "ate", "nat", "bat"])
+# grouped_anagrams(["eat", "tea", "tan", "ate", "nat", "bat"])
+top_k_frequent_elements([1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5], 3)
