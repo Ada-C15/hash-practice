@@ -25,8 +25,8 @@ def grouped_anagrams(strings):
 def top_k_frequent_elements(nums, k):
     """ This method will return the k most common elements
         In the case of a tie it will select the first occuring element.
-        Time Complexity: ?
-        Space Complexity: ?
+        Time Complexity: O(m n)
+        Space Complexity: O(n)
     """
     freq_map = {}
 
@@ -54,8 +54,23 @@ def valid_sudoku(table):
         Each element can either be a ".", or a digit 1-9
         The same digit cannot appear twice or more in the same 
         row, column or 3x3 subgrid
-        Time Complexity: ?
-        Space Complexity: ?
+        Time Complexity: O(n m)
+        Space Complexity: O(n)
     """
-    pass
+    seen = set()
 
+    # i = rows
+    # j = columns
+    for i in range(9):
+        for j in range(9):
+            current_val = table[i][j]
+            if current_val != ".":
+                if current_val + " in row " + str(i) in seen or \
+                    current_val + " in col " + str(j) in seen or \
+                    current_val + " in box " + str(i/3) + "-" + str(j/3) in seen:
+                    return False
+                else:
+                    seen.add(current_val + " in col " + str(j)) 
+                    seen.add(current_val + " in row " + str(i))    
+                    seen.add(current_val + " in box " + str(i/3) + "-" + str(j/3))  
+    return True
