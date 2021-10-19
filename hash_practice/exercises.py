@@ -2,8 +2,11 @@
 def grouped_anagrams(strings):
     """ This method will return an array of arrays.
         Each subarray will have strings which are anagrams of each other
-        Time Complexity: ?
-        Space Complexity: ?
+
+        The idea in general is to create hash function, that will return same hashing index  for anagrams.
+
+        Time Complexity: O(n)
+        Space Complexity: O(n)
     """
     prime_numbers = [
         3,
@@ -37,20 +40,20 @@ def grouped_anagrams(strings):
     if len(strings) == 0:
         return []
 
-    def construct_mapping_letter_to_number(letters, numbers):
-        map = {}
+    def construct_cellsping_letter_to_number(letters, numbers):
+        cells = {}
         for index in range(len(letters)):
-            map[letters[index]] = numbers[index]
-        return map
+            cells[letters[index]] = numbers[index]
+        return cells
 
-    letter_to_prime_mapping = construct_mapping_letter_to_number(
+    letter_to_prime_cellsping = construct_cellsping_letter_to_number(
         alphabet, prime_numbers)
     hash_table = {}
 
     for string in strings:
         hash_index = 1
         for character in string:
-            hash_index = hash_index * letter_to_prime_mapping[character]
+            hash_index = hash_index * letter_to_prime_cellsping[character]
 
         if not hash_table.get(hash_index):
             hash_table[hash_index] = [string]
@@ -79,35 +82,31 @@ def top_k_frequent_elements(nums, k):
         return nums
     if len(nums) == 0:
         return []
-    frequency_map = {}
+    frequency_cells = {}
     for num in nums:
-        if frequency_map.get(num):
-            frequency_map[num] += 1
+        if frequency_cells.get(num):
+            frequency_cells[num] += 1
         else:
-            frequency_map[num] = 1
-    print(frequency_map)
+            frequency_cells[num] = 1
 
     max_frequency = 0
-    key_frequency_map = {}
-    for num, frequency in frequency_map.items():
-        if not key_frequency_map.get(frequency):
-            key_frequency_map[frequency] = [num]
+    key_frequency_cells = {}
+    for num, frequency in frequency_cells.items():
+        if not key_frequency_cells.get(frequency):
+            key_frequency_cells[frequency] = [num]
         else:
-            key_frequency_map[frequency].append(num)
+            key_frequency_cells[frequency].append(num)
         if frequency > max_frequency:
             max_frequency = frequency
-    print(key_frequency_map)
-    print(max_frequency)
 
     result = []
     while max_frequency > 0 and len(result) < k:
-        if key_frequency_map.get(max_frequency):
-            for num in key_frequency_map[max_frequency]:
+        if key_frequency_cells.get(max_frequency):
+            for num in key_frequency_cells[max_frequency]:
                 if len(result) < k:
                     result.append(num)
         max_frequency -= 1
 
-    print(result)
     return result
 
 
@@ -133,15 +132,15 @@ def top_k_frequent_elements_alternative_solution(nums, k):
     if len(nums) == 0:
         return []
 
-    frequency_map = {}
+    frequency_cells = {}
     for num in nums:
-        if frequency_map.get(num):
-            frequency_map[num] += 1
+        if frequency_cells.get(num):
+            frequency_cells[num] += 1
         else:
-            frequency_map[num] = 1
+            frequency_cells[num] = 1
 
     num_freq_list = []
-    for num, frequency in frequency_map.items():
+    for num, frequency in frequency_cells.items():
         num_freq_list.append((num, frequency))
 
     sorted_num_freq_list = sorted(
@@ -162,11 +161,64 @@ def valid_sudoku(table):
         Each element can either be a ".", or a digit 1-9
         The same digit cannot appear twice or more in the same
         row, column or 3x3 subgrid
-        Time Complexity: ?
-        Space Complexity: ?
+
+        Time Complexity: O(n^2)
+        Space Complexity: O(n)
     """
-    pass
+    dimension = len(table)
+    sub_box_dimension = dimension // 3
 
+    def validate_row(row):
+        cells = set()
+        for cell in row:
+            if cell == ".":
+                continue
+            if cell in cells:
+                return False
+            else:
+                cells.add(cell)
+        return True
 
-# grouped_anagrams(["eat", "tea", "tan", "ate", "nat", "bat"])
-top_k_frequent_elements([1, 2, 2, 2, 3, 3, 3], 2)
+    def validate_column(table, column_number, dimension):
+        cells = set()
+        for row in range(dimension):
+            cell = table[row][column_number]
+            if cell == ".":
+                continue
+            if cell in cells:
+                return False
+            else:
+                cells.add(cell)
+        return True
+
+    def validate_3_by_3_sub_box(table, start_row, start_column):
+        # sub_box_dimension = 3
+        cells = set()
+        for row in range(start_row, start_row + sub_box_dimension):
+            for column in range(
+                    start_column,
+                    start_column +
+                    sub_box_dimension):
+                cell = table[row][column]
+                if cell == ".":
+                    continue
+                if cell in cells:
+                    return False
+                else:
+                    cells.add(cell)
+        return True
+
+    for row in table:
+        if not validate_row(row):
+            return False
+
+    for column in range(dimension):
+        if not validate_column(table, column, dimension):
+            return False
+
+    sub_range = sub_box_dimension * 2 - 1
+    for row in range(0, sub_range, sub_box_dimension):
+        for column in range(0, sub_range, sub_box_dimension):
+            if not validate_3_by_3_sub_box(table, row, column):
+                return False
+    return True
