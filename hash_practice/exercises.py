@@ -5,15 +5,46 @@ def grouped_anagrams(strings):
         Time Complexity: ?
         Space Complexity: ?
     """
-    pass
+
+    if not strings:
+        return []
+
+    word_dict = {}
+    for word in strings:
+        sorted_word = sorted(word)
+        new_word = ''.join(sorted_word)
+        if new_word in word_dict:
+            word_dict[new_word].append(word)
+        else:
+            word_dict[new_word] = [word]
+
+    return [word for word in word_dict.values()]
+
 
 def top_k_frequent_elements(nums, k):
     """ This method will return the k most common elements
         In the case of a tie it will select the first occuring element.
-        Time Complexity: ?
-        Space Complexity: ?
+        Time Complexity: o(n log n) 
+        Space Complexity: o(n)  
     """
-    pass
+
+    a_dict = {}
+    return_list = []
+    if not nums:
+        return return_list
+
+    for i in range(0, len(nums)):
+        if nums[i] in a_dict:
+            a_dict[nums[i]] += 1
+        else:
+            a_dict[nums[i]] = 1
+
+    sorted_dict = sorted(a_dict.items(), key=lambda tup: tup[1], reverse=True)
+
+    for j in range(0, k):
+        return_list.append(sorted_dict[j][0])
+
+    return return_list
 
 
 def valid_sudoku(table):
@@ -26,4 +57,3 @@ def valid_sudoku(table):
         Space Complexity: ?
     """
     pass
-
