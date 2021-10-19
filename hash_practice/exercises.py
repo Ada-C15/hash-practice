@@ -162,11 +162,12 @@ def valid_sudoku(table):
         The same digit cannot appear twice or more in the same
         row, column or 3x3 subgrid
 
+        This code will work for any [n x n] square matrix where n is multiple of 3, thus:
         Time Complexity: O(n^2)
         Space Complexity: O(n)
     """
     dimension = len(table)
-    sub_box_dimension = dimension // 3
+    sub_box_dimension = 3
 
     def validate_row(row):
         cells = set()
@@ -216,7 +217,7 @@ def valid_sudoku(table):
         if not validate_column(table, column, dimension):
             return False
 
-    sub_range = sub_box_dimension * 2 - 1
+    sub_range = sub_box_dimension * (dimension // sub_box_dimension - 1) - 1
     for row in range(0, sub_range, sub_box_dimension):
         for column in range(0, sub_range, sub_box_dimension):
             if not validate_3_by_3_sub_box(table, row, column):
