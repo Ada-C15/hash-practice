@@ -24,6 +24,57 @@ def grouped_anagrams(words):
         anagrams.append(value)
     return anagrams
     
+
+
+# def top_k_frequent_elements(nums, k):
+#     """ This method will return the k most common elements
+#         In the case of a tie it will select the first occuring element.
+#         Time Complexity: ?
+#         Space Complexity: ?
+#     """
+#     num_dict = {} #num_dict = {1:3, 2:2, 3: 3, 4:4, 7:1, 5:4, 6:4}
+#     # k = 2
+#     #  [4, 4]
+#     for num in nums:
+#         if num not in num_dict:
+#             num_dict[num] = 1
+#         elif num in num_dict:
+#             num_dict[num] += 1
+#     # reverse dictionary so I have max as key and number as value
+#     reversed_dictionary = {value : key for (key, value) in num_dict.items()}
+#     print(' ------ num_dict -----')
+#     print(reversed_dictionary)
+
+#     max_nums = []
+#     max = 0
+#     key = 0
+#     value = 0
+#     for i in range(k):
+#         for key, value in num_dict.items():
+#             if key > max: # 0>1
+#                 max = key # max 
+#             else:
+#                 max = max
+#         max_nums.append(max)
+#         # max_nums.append(num_dict[key])
+#         # print('--- max_nums ---')
+#         # print(max_nums)
+# # ---------------
+#         # print(f'--- deleting {num_dict[key]} ---')
+#         # del num_dict[key]
+#         # print('---  now num_dict is ---')
+#         # print(num_dict)
+
+    
+#     # print(max_nums)
+#     return max_nums
+
+#     # Works?? 
+#     # for i in range(k):
+#     #     top = max(freq_map, key=freq_map.get)
+#     #     top_k.append(top)
+#     #     del freq_map[top]
+
 def top_k_frequent_elements(nums, k):
     """ This method will return the k most common elements
         In the case of a tie it will select the first occuring element.
@@ -41,32 +92,18 @@ def top_k_frequent_elements(nums, k):
 
     max_nums = []
     max = 0
+    
     for i in range(k):
-        for key, value in num_dict.items():
-            if value > max: # 0>1
-                max = value # max 
-            else:
-                max = max
-
-            print(max_nums)
-        max_nums.append(max)
-        del num_dict[max]
+        most_common = max(num_dict, key=num_dict.get)
+        max_nums.append(most_common)
+        del num_dict[most_common]
+    
     return max_nums
 
-    # Works?? 
-    # for i in range(k):
-    #     top = max(freq_map, key=freq_map.get)
-    #     top_k.append(top)
-    #     del freq_map[top]
-            
-    # create a dictionary
-    # if you havent' seen it you add it
-    #if you have seent it you do +1
-    # you go over your dictionary and find 
-    # max counter  variable
-
-    pass
-
+# for i in range(k):
+#     #     top = max(freq_map, key=freq_map.get)
+#     #     top_k.append(top)
+#     #     del freq_map[top]
 
 def valid_sudoku(table):
     """ This method will return the true if the table is still
