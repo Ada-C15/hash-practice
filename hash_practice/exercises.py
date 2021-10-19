@@ -65,18 +65,50 @@ def top_k_frequent_elements(nums, k):
         In the case of a tie it will select the first occuring element.
 
         Pseudocode solution 2:
-        1.
-        2.
-        3.
-        4.
+        1.Go over the input array and create unique element frequency hash table.
+        2. Go over unique element frequency hash table and create new hash table with key being frequencies and values being list of unique element that share that same frequency.
+        3. While iterating over unique element frequency hash table calculate the max availible frequency.
+        4. Iterate over key-value pairs in descending order (starting from max frequency) and construct resulting array by adding k elements to it.
 
-        Time Complexity: ?
-        Space Complexity: ?
+        This solution would work for both sorted and not sorted input array.
+
+        Time Complexity: O(n)
+        Space Complexity: O(n)
     """
     if len(nums) == k:
         return nums
     if len(nums) == 0:
         return []
+    frequency_map = {}
+    for num in nums:
+        if frequency_map.get(num):
+            frequency_map[num] += 1
+        else:
+            frequency_map[num] = 1
+    print(frequency_map)
+
+    max_frequency = 0
+    key_frequency_map = {}
+    for num, frequency in frequency_map.items():
+        if not key_frequency_map.get(frequency):
+            key_frequency_map[frequency] = [num]
+        else:
+            key_frequency_map[frequency].append(num)
+        if frequency > max_frequency:
+            max_frequency = frequency
+    print(key_frequency_map)
+    print(max_frequency)
+
+    result = []
+    while max_frequency > 0 and len(result) < k:
+        if key_frequency_map.get(max_frequency):
+            for num in key_frequency_map[max_frequency]:
+                if len(result) < k:
+                    result.append(num)
+        max_frequency -= 1
+
+    print(result)
+    return result
 
 
 def top_k_frequent_elements_alternative_solution(nums, k):
@@ -137,4 +169,4 @@ def valid_sudoku(table):
 
 
 # grouped_anagrams(["eat", "tea", "tan", "ate", "nat", "bat"])
-top_k_frequent_elements([1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5], 3)
+top_k_frequent_elements([1, 2, 2, 2, 3, 3, 3], 2)
