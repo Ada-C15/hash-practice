@@ -62,3 +62,27 @@ res = ''.join(sorted(test_string))
       
 # print result
 print("String after sorting : " + str(res))
+
+# another shorter but equally complexity way
+
+# def top_k_frequent_elements(nums, k):
+#     """ This method will return the k most common elements
+#         In the case of a tie it will select the first occuring element.
+#         Time Complexity: ?
+#         Space Complexity: ?
+#     """
+#     num_dict = {} 
+#     for num in nums:
+#         if num not in num_dict:
+#             num_dict[num] = 1
+#         elif num in num_dict:
+#             num_dict[num] += 1
+
+#     max_nums = []
+
+#     for i in range(k):
+#         most_common = max(num_dict, key=num_dict.get)
+#         max_nums.append(most_common)
+#         del num_dict[most_common]
+    
+#     return max_nums
