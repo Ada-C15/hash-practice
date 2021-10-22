@@ -40,20 +40,20 @@ def grouped_anagrams(strings):
     if len(strings) == 0:
         return []
 
-    def construct_cellsping_letter_to_number(letters, numbers):
+    def map_letter_to_number(letters, numbers):
         cells = {}
         for index in range(len(letters)):
             cells[letters[index]] = numbers[index]
         return cells
 
-    letter_to_prime_cellsping = construct_cellsping_letter_to_number(
+    map_letter_to_number = map_letter_to_number(
         alphabet, prime_numbers)
     hash_table = {}
 
     for string in strings:
         hash_index = 1
         for character in string:
-            hash_index = hash_index * letter_to_prime_cellsping[character]
+            hash_index = hash_index * map_letter_to_number[character]
 
         if not hash_table.get(hash_index):
             hash_table[hash_index] = [string]
