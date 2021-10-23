@@ -4,7 +4,7 @@
 #turning in fully. 
 
 # def anagram_helper(word1, word2):
-
+    
 #     char_map1 = {}
 #     char_map2 = {}
 
@@ -38,8 +38,7 @@
 #     for i, word1 in enumerate(strings):
 #         if word1 in hash_set:
 #             continue
-        
-#         temp = [word1]
+#         temp.append(word1)
 #         hash_set[word1] = 1
 
 #         for j, word2 in enumerate(strings):
@@ -52,6 +51,37 @@
 #         temp = []
 
 #     return grouped_anagrams
+
+def anagram_helper(word1, word2):
+    
+    if sorted(word1) == sorted(word2):
+        return True
+    else:
+        return False
+
+
+def grouped_anagrams(strings):
+    hash_set = {}
+    temp_array_strings = []
+    anagrams = []
+    
+    for i, word1 in enumerate(strings):
+        if word1 in hash_set:
+            continue
+        temp_array_strings.append(word1)
+        hash_set[word1] = 1
+
+        for j, word2 in enumerate(strings):
+            if anagram_helper(word1, word2):
+                if word2 not in hash_set:
+                    temp_array_strings.append(word2)
+                    hash_set[word2] = 1
+
+        anagrams.append(temp_array_strings)
+        print(anagrams)
+        temp_array_strings = []
+
+    return anagrams
 
 
 def top_k_frequent_elements(nums, k):
