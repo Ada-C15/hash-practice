@@ -73,8 +73,6 @@ def top_k_frequent_elements(nums, k):
     
     return nums_arr
     
-
-
 def valid_sudoku(table):
     """ This method will return the true if the table is still
         a valid sudoku table.
@@ -85,4 +83,6 @@ def valid_sudoku(table):
         Space Complexity: ?
     """
     pass
+
+    #  will maybe do this later --> similar to tic tac toe, check that repo
 
