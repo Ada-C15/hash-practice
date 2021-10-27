@@ -25,7 +25,30 @@ def top_k_frequent_elements(nums, k):
         Time Complexity: ?
         Space Complexity: ?
     """
-    pass
+    if len(nums) == 0:
+        return []
+    
+    # build a tally dictionary where the key is the number 
+    # and the value is the count for occurances of that number
+    tally = {}
+    for num in nums:
+        if num in tally:
+            tally[num] += 1
+        tally[num] = 1
+    
+    # make a list of the keys in the dictionary
+    
+    # sort values from greatest to least in a list
+    # what if there is a tie?
+    nums_sorted_by_frequency = sorted(tally, reverse=True)
+
+    # loop through the sorted values and append the value to the array
+    # take the first k values 
+    k_most_frequent = []
+    for i in range(0,k):
+        k_most_frequent.append(nums_sorted_by_frequency[i])
+
+    return k_most_frequent 
 
 
 def valid_sudoku(table):
@@ -38,4 +61,6 @@ def valid_sudoku(table):
         Space Complexity: ?
     """
     pass
+
+
 
