@@ -5,7 +5,30 @@ def grouped_anagrams(strings):
         Time Complexity: ?
         Space Complexity: ?
     """
-    pass
+
+    anagram_result = {}
+
+    # iterate through each word in strings
+    for word in strings:
+        # sort anagrams into different lists
+        # use sorted to rearrange each word alphabetically
+        # eat, tea, ate --> aet, aet, aet
+        # nat --> ant
+        # bat --> abt 
+
+        # can I use this sorted method?
+        sort_anagram = ''.join(sorted(word))
+        if sort_anagram in anagram_result:
+            # if word is already an anagram of another word, append word to same list
+            anagram_result[sort_anagram].append(word)
+
+        else:
+            # add word to new list
+            # ! brackets need to be around word b/c we're adding it as a new list in hash table
+            anagram_result[sort_anagram] = [word]
+
+    return list(anagram_result.values())
+
 
 def top_k_frequent_elements(nums, k):
     """ This method will return the k most common elements
