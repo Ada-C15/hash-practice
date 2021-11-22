@@ -13,7 +13,7 @@ By the end of this exercise you should be able to:
 
 Given an array of strings, group anagrams together.
 
-### Example
+### Example 
 
 ```
 Input: ["eat", "tea", "tan", "ate", "nat", "bat"],
