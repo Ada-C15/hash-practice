@@ -2,8 +2,8 @@
 def grouped_anagrams(strings):
     """ This method will return an array of arrays.
         Each subarray will have strings which are anagrams of each other
-        Time Complexity: ?
-        Space Complexity: ?
+        Time Complexity: O(n)
+        Space Complexity: O(n)
     """
     words = {}
     for word in strings:
@@ -22,30 +22,23 @@ def grouped_anagrams(strings):
 def top_k_frequent_elements(nums, k):
     """ This method will return the k most common elements
         In the case of a tie it will select the first occuring element.
-        Time Complexity: ?
-        Space Complexity: ?
+        Time Complexity: O(n log n) due to sorting
+        Space Complexity: O(n)
     """
     if len(nums) == 0:
         return []
     
-    # build a tally dictionary where the key is the number 
-    # and the value is the count for occurances of that number
     tally = {}
     for num in nums:
         if num in tally:
             tally[num] += 1
-        tally[num] = 1
+        else:
+            tally[num] = 1
     
-    # make a list of the keys in the dictionary
-    
-    # sort values from greatest to least in a list
-    # what if there is a tie?
-    nums_sorted_by_frequency = sorted(tally, reverse=True)
+    nums_sorted_by_frequency = sorted(tally, key=tally.get, reverse=True)
 
-    # loop through the sorted values and append the value to the array
-    # take the first k values 
     k_most_frequent = []
-    for i in range(0,k):
+    for i in range(k):
         k_most_frequent.append(nums_sorted_by_frequency[i])
 
     return k_most_frequent 
