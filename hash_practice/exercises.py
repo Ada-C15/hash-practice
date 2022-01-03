@@ -44,8 +44,8 @@ def valid_sudoku(table):
         Each element can either be a ".", or a digit 1-9
         The same digit cannot appear twice or more in the same 
         row, column or 3x3 subgrid
-        Time Complexity: O(n2)
-        Space Complexity: O(n2)
+        Time Complexity: O(n^2)
+        Space Complexity: O(n^2)
     """
     
     #row
