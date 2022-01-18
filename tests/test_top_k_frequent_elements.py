@@ -7,7 +7,7 @@ def test_it_works_with_example_1():
     k = 2
 
     # Act
-    answer = top_k_frequent_elements(nums=numbers, k=k)
+    answer = top_k_frequent_elements(numbers=numbers, k=k)
 
     # Assert
     answer.sort()
