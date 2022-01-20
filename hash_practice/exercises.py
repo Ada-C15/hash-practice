@@ -1,5 +1,12 @@
+from hash_practice.linkedlist import LinkedList
 
-
+# sums might be bb ac might add to same number. 
+def hash_helper(word):
+    hash = 0
+    for letter in word:
+        unicode_char = ord(letter)
+        hash += unicode_char
+    return hash
 
 def grouped_anagrams(strings):
     """ This method will return an array of arrays.
@@ -13,22 +20,21 @@ def grouped_anagrams(strings):
     if strings == []:
         return []
     for word in strings:
-        hash = 0
-        for letter in word:
-            unicode_char = ord(letter)
-            hash += unicode_char
-        if hash in anagrams:
-            anagrams[hash].append(word)
-        else:
-            anagrams[hash] = [word]
+        hash = hash_helper(word)
+        # If it is not in anagrms make a new linked list
+        if hash not in anagrams:
+            anagrams[hash] = LinkedList()
+        # regardless add to linked list
+        anagrams[hash].add_node(word)
 
 
     return create_anagram_list(anagrams)
 
 def create_anagram_list(anagrams):
     grouped_anagrams = []
+    #keys are numbers and values are linked lists 
     for key, value in anagrams.items():
-        grouped_anagrams.append(value)
+        grouped_anagrams.append(value.to_list())
     return grouped_anagrams
 
     # split each word 
