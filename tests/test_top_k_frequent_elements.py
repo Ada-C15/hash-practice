@@ -60,3 +60,15 @@ def test_returns_2_3_for_1_2_2_2_3_3_3():
     answer.sort()
     assert answer == [2, 3]
 
+def test_returns_tie_case():
+    # Arrange
+    numbers = [1,1,1,2, 2, 2, 3, 3, 3]
+    k = 2
+
+    # Act
+    answer = top_k_frequent_elements(numbers, k)
+
+    # Assert
+    answer.sort()
+    assert answer == [1, 2]
+
