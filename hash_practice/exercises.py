@@ -2,18 +2,42 @@
 def grouped_anagrams(strings):
     """ This method will return an array of arrays.
         Each subarray will have strings which are anagrams of each other
-        Time Complexity: ?
-        Space Complexity: ?
+        Time Complexity: O(n)
+        Space Complexity: O(n)
     """
-    pass
+    anagrams = {}
+
+    for string in strings:
+        sortedString = "".join(sorted(string))
+        if sortedString in anagrams:
+            anagrams[sortedString].append(string)
+        else:
+            anagrams[sortedString] = [string]
+
+
+    return list(anagrams.values())
 
 def top_k_frequent_elements(nums, k):
     """ This method will return the k most common elements
         In the case of a tie it will select the first occuring element.
-        Time Complexity: ?
-        Space Complexity: ?
+        Time Complexity: O(n)
+        Space Complexity: o(n)
     """
-    pass
+    numMap = {}
+    res = []
+
+    if nums == []:
+        return nums
+
+    for num in nums:
+        numMap[num] = numMap.get(num, 0) +1
+
+    for i in range(k):
+        maxValue = max(numMap, key=numMap.get)
+        res.append(maxValue)
+        numMap.pop(maxValue)
+                
+    return res
 
 
 def valid_sudoku(table):
