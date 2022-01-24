@@ -51,12 +51,13 @@ def test_will_work_for_list_with_k_elements_all_unique():
 def test_returns_2_3_for_1_2_2_2_3_3_3():
     # Arrange
     numbers = [1, 2, 2, 2, 3, 3, 3]
-    k = 2
+    k = 1
 
     # Act
     answer = top_k_frequent_elements(numbers, k)
 
     # Assert
     answer.sort()
+    print(answer)
     assert answer == [2, 3]
 
