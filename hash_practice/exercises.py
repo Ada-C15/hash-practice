@@ -5,7 +5,23 @@ def grouped_anagrams(strings):
         Time Complexity: ?
         Space Complexity: ?
     """
-    pass
+    result = []
+    dict = {}
+    for string in strings:
+        l = list(string)
+        match_found = False
+        for k in dict.keys():
+            if len(k) == len(l):
+                if len(set(k).difference(set(l))) == 0: # k = abc, l = bc, k - l = a if difference is a 0 they should be a match
+                    dict[k].append(string)
+                    match_found = True
+        if not match_found:
+            dict[string] = [string]
+    for l in dict.values():
+        result.append(l)
+    return result
+
+grouped_anagrams(["eat", "tea", "tan", "ate", "nat", "bat"])
 
 def top_k_frequent_elements(nums, k):
     """ This method will return the k most common elements
@@ -13,7 +29,31 @@ def top_k_frequent_elements(nums, k):
         Time Complexity: ?
         Space Complexity: ?
     """
-    pass
+    if len(nums) == 0:
+        return []
+    frequency = {}
+    for num in nums:
+        if num in frequency.keys():
+            frequency[num] += 1
+        else:
+            frequency[num] = 1
+ 
+    result = []
+    for i in range(k):
+        max_k = 0
+        max_v = 0     #list(frequency.items())[0]
+        for key,v in frequency.items():
+            if v > max_v:
+                max_k = key
+                max_v = v
+        result.append(max_k)
+        del frequency[max_k]
+    return result
+                
+
+
+
+
 
 
 def valid_sudoku(table):
