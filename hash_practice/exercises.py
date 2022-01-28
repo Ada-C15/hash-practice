@@ -2,8 +2,8 @@
 def grouped_anagrams(strings):
     """ This method will return an array of arrays.
         Each subarray will have strings which are anagrams of each other
-        Time Complexity: ?
-        Space Complexity: ?
+        Time Complexity: On
+        Space Complexity: On
     """
 
     result = []
@@ -27,8 +27,8 @@ def grouped_anagrams(strings):
 def top_k_frequent_elements(nums, k):
     """ This method will return the k most common elements
         In the case of a tie it will select the first occuring element.
-        Time Complexity: ?
-        Space Complexity: ?
+        Time Complexity: Onk
+        Space Complexity: On
     """
     if not nums or k <= 0: 
         return []
@@ -59,8 +59,8 @@ def valid_sudoku(table):
         Each element can either be a ".", or a digit 1-9
         The same digit cannot appear twice or more in the same 
         row, column or 3x3 subgrid
-        Time Complexity: ?
-        Space Complexity: ?
+        Time Complexity: O1 bc it's always 9x9?
+        Space Complexity: O1 bc the hash is always #1-9?
     """
     hash = {}
     for n in range(1, 10):
