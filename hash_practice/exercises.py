@@ -1,11 +1,8 @@
-import re
+#below returns an array of arrays.Each subarray 
+# contains strings which are anagrams of each other
+# Time/Space Complexity: O(n)
 
 def grouped_anagrams(strings):
-    """ This method will return an array of arrays.
-        Each subarray will have strings which are anagrams of each other
-        Time Complexity: O(n)
-        Space Complexity: O(n)
-    """
     anagrams = dict()
     groups = []
     for word in strings:
@@ -19,14 +16,27 @@ def grouped_anagrams(strings):
         groups.append(value)
     return groups
 
+############top_k_freq helper##################
+#there is no easy way to look up a key that responds to a specific value, 
+# so maybe instead I should switch all of the values and keys for faster look up?
+
+def get_keys(dict, val):
+      keys = set()
+      for key, value in dict.items():
+         if val == value:
+           keys.add(key)
+      if keys:
+        return keys
+      return
+    
+################################################
+# This method will return the k most common elements (numbers only)
+# In the case of a tie, select the first occuring element. (a twist.)
+# *Time/Space Complexity: O(n)
+# *probably not jw
+
 def top_k_frequent_elements(nums, k):
-    """ This method will return the k most common elements (numbers only)
-        In the case of a tie it will select the first occuring element. (ooh, a twist.)
-        (will the numbers always be sequential?) 
-        Time Complexity: O(n)*
-        Space Complexity: O(n)* 
-        *maybe not jw
-    """
+    top_k = []
     num_count = {}
     for num in nums:
         if num_count.get(num):
@@ -34,61 +44,47 @@ def top_k_frequent_elements(nums, k):
         else:
             num_count[num] = 1
 
-    def get_keys(val):
-      keys = set()
-      for key, value in num_count.items():
-         if val == value:
-           keys.add(key)
-      if keys:
-        return keys
-      return
-             
-    top_k = []
+    #chris wants a rewrite of below (who can blame him)  
+    #try reimagining how I can get rid of helper function 
+    #to instead leverage hash more rather than loop through 
     for i in range(len(num_count.values()), 0, -1):
-      flat_k = [ele for keys in top_k for ele in keys]
-      if len(flat_k) >= k:
+        flat_k = [ele for keys in top_k for ele in keys]
+        if get_keys(num_count, i):
+          top_k.append(get_keys(num_count, i))
+        if len(flat_k) >= k:
           return flat_k
-      if get_keys(i) is not None:
-          top_k.append(get_keys(i))
-    return list(ele for keys in top_k for ele in keys)
+       
+    return [ele for keys in top_k for ele in keys]
 
-############sudoku helpers#######################
+############sudoku helpers######################
+import re 
 
-def num(string):
-    regex = '^[0-9]$'
-    if re.search(regex, string):
+def is_num(string):
+    nums = '^[0-9]$'
+    if re.search(nums, string):
         return True
     return False
 
-def valid(line):
-    for i in range(len(line)):
-        if num(line[i]) == True:
-            continue
-        else:
-            no_only = [i for i in line if num(i)]
-            return len(set(no_only)) == len(no_only) #okay but this is the only place I'm using a hash tho... may need redo
-    return len(line) == 9 and sum(line) == sum(set(line))       
+def valid(line):                                ##########################behold:
+    num_only = [i for i in line if is_num(i)]   ################################ the single
+    if len(num_only) == len(line):              ################################ but useful 
+        return len(set(num_only)) == 9 and sum(num_only) == 45 == sum(set(line))#appearance
+                                                ################################ of hash sets()
+    return len(set(line)) == len(num_only) + 1  ################################ in this solution
+    
+#################################################
+### *Time/Space Complexity: O(n)
+### *bc input will always be the same size tho...
+###  do we need to consider it for these? 
 
 def valid_sudoku(table):
-    """ This method will return the true if the table is still
-        a valid sudoku table.
-        Each element can either be a ".", or a digit 1-9
-        The same digit cannot appear twice or more in the same 
-        row, column or 3x3 subgrid
-        (if solvable and unfinished, give it to grammie sammie to solve, 
-        and check solution if you want) 
-        Time Complexity: O(n)*
-        Space Complexity: O(n)*
-            *It will always be the same size tho...
-    """
-    nope_r = [row for row in table if not valid(row)]
-    nope_c = [col for col in table if not valid(col)]
     subgrids = []
-
     for i in range(0, 9, 3):
         for j in range(0, 9, 3):
-            subgrid = [item for items in [row[j:j + 3] for row in table[i:i + 3]] for item in items]
+            subgrid = [char for chars in [row[j:j + 3] for row in table[i:i + 3]] for char in chars]
             subgrids.append(subgrid)
-    nope_subgrids = [grid for grid in subgrids if not valid(grid)]
 
-    return not (nope_r or nope_c or nope_subgrids)
+    nope_subgrids = [grid for grid in subgrids if not valid(grid)]
+    nope_columns_rows = [line for line in table if not valid(line)]
+
+    return not (nope_columns_rows or nope_subgrids)
