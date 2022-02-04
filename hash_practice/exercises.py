@@ -16,19 +16,6 @@ def grouped_anagrams(strings):
         groups.append(value)
     return groups
 
-############top_k_freq helper##################
-#there is no easy way to look up a key that responds to a specific value, 
-# so maybe instead I should switch all of the values and keys for faster look up?
-
-def get_keys(dict, val):
-      keys = set()
-      for key, value in dict.items():
-         if val == value:
-           keys.add(key)
-      if keys:
-        return keys
-      return
-    
 ################################################
 # This method will return the k most common elements (numbers only)
 # In the case of a tie, select the first occuring element. (a twist.)
@@ -36,25 +23,20 @@ def get_keys(dict, val):
 # *probably not jw
 
 def top_k_frequent_elements(nums, k):
-    top_k = []
     num_count = {}
     for num in nums:
         if num_count.get(num):
             num_count[num] += 1
         else:
             num_count[num] = 1
-
-    #chris wants a rewrite of below (who can blame him)  
-    #try reimagining how I can get rid of helper function 
-    #to instead leverage hash more rather than loop through 
+    
+    top = []
     for i in range(len(num_count.values()), 0, -1):
-        flat_k = [ele for keys in top_k for ele in keys]
-        if get_keys(num_count, i):
-          top_k.append(get_keys(num_count, i))
-        if len(flat_k) >= k:
-          return flat_k
-       
-    return [ele for keys in top_k for ele in keys]
+        for key, value in num_count.items():
+          if i == value:
+            top.append(key)
+    
+    return top[:k]
 
 ############sudoku helpers######################
 import re 
@@ -76,7 +58,6 @@ def valid(line):                                ##########################behold
 ### *Time/Space Complexity: O(n)
 ### *bc input will always be the same size tho...
 ###  do we need to consider it for these? 
-
 def valid_sudoku(table):
     subgrids = []
     for i in range(0, 9, 3):
